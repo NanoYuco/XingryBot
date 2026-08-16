@@ -1,0 +1,48 @@
+# Python bytecode and caches
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+/.venv/
+/venv/
+/env/
+
+# Test, type-checking, and coverage caches
+.pytest_cache/
+.mypy_cache/
+.pyright/
+.ruff_cache/
+.tox/
+.nox/
+.coverage
+.coverage.*
+htmlcov/
+
+# Build and packaging outputs
+/build/
+/dist/
+*.egg-info/
+.eggs/
+
+# Local environment configuration
+.env
+.env.*
+!.env.example
+!.env.*.example
+
+# Runtime database and logs
+/cat_xingry.db
+/cat_xingry.db-wal
+/cat_xingry.db-shm
+/cat_xingry.db-journal
+/*.log
+/logs/
+
+# macOS metadata
+.DS_Store
+
+# Local editor and IDE settings
+/.idea/
+/.vscode/
+*.code-workspace
