@@ -27,3 +27,20 @@ def init_db() -> None:
             )
             """
         )
+        conn.execute(
+            """
+            CREATE TABLE IF NOT EXISTS patrol_schedule (
+                id INTEGER PRIMARY KEY CHECK (id = 1),
+                next_run_at TEXT NOT NULL
+            )
+            """
+        )
+        conn.execute(
+            """
+            CREATE TABLE IF NOT EXISTS repo_overview_snapshots (
+                repo_path TEXT PRIMARY KEY,
+                snapshot_json TEXT NOT NULL,
+                fetched_at TEXT NOT NULL
+            )
+            """
+        )

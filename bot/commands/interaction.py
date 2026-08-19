@@ -76,7 +76,7 @@ async def status_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
         f"• **今日摸摸**：`{today_pats} / 5` 次\n\n"
         "💡 **好感度获取途径**：\n"
         "1. 每日使用 `/pat` 摸摸喵喵的头 (+2/次)\n"
-        "2. 提交代码推进项目，每次产生新 Commit 均会增加好感度喵！\n"
+        "2. 法定工作日随机巡逻会抽查过去 24 小时 Commit，每个 Commit 增加 5 点好感度喵！\n"
         "3. 周日推送周报结算时，有项目提交可获得额外好感奖励！"
     )
     await update.message.reply_text(msg, parse_mode="Markdown")

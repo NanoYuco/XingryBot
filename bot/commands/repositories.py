@@ -3,7 +3,7 @@ from telegram.ext import ContextTypes
 
 from database.repo_repository import add_repo, get_user_repos, remove_repo
 from database.user_repository import register_user
-from github.client import fetch_repo_today_commits
+from github.client import fetch_public_repo_metadata
 from github.parser import parse_git_url
 
 
@@ -15,7 +15,7 @@ async def bind_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if not context.args:
         await update.message.reply_text(
             "(=｀ω´=) 格式错啦喵！正确格式：\n"
-            "`/bind https://github.com/NanoYuco/RougleLikeTest.git` 喵！",
+            "`/bind https://github.com/NanoYuco/XingryBot.git` 喵！",
             parse_mode="Markdown",
         )
         return
@@ -32,7 +32,7 @@ async def bind_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
         parse_mode="Markdown",
     )
 
-    result = await fetch_repo_today_commits(repo_path)
+    result = await fetch_public_repo_metadata(repo_path)
     if result is None:
         await update.message.reply_text(
             f"(=; ｪ ;=) 找不到 GitHub 仓库 `{repo_path}`，请检查仓库名或权限喵！",
@@ -66,7 +66,7 @@ async def unbind_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if not context.args:
         await update.message.reply_text(
             "(=｀ω´=) 请输入要解绑的仓库名、链接或序号喵！例如："
-            "`/unbind 1` 或 `/unbind NanoYuco/RougleLikeTest`",
+            "`/unbind 1` 或 `/unbind NanoYuco/XingryBot`",
             parse_mode="Markdown",
         )
         return
@@ -106,7 +106,7 @@ async def list_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if not repos:
         await update.message.reply_text(
             "🐾 主人当前还没有绑定任何 Git 仓库喵！快捷绑定命令：\n"
-            "`/bind https://github.com/NanoYuco/RougleLikeTest.git`",
+            "`/bind https://github.com/NanoYuco/XingryBot.git`",
             parse_mode="Markdown",
         )
         return
@@ -117,6 +117,7 @@ async def list_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     msg = (
         f"📋 **主人已绑定的 Git 仓库列表** ({len(repos)} 个)：\n\n"
         f"{repo_list_text}\n\n"
-        "💡 使用 `/check` 可快速查看所有仓库的今日更新！"
+        "💡 使用 `/check` 可查看所有仓库的 Star、PR、Issue 等项目总览！\n"
+        "🐾 喵喵会在中国大陆法定工作日 10:00–17:00 随机巡逻过去 24 小时的 Commit。"
     )
     await update.message.reply_text(msg, parse_mode="Markdown")

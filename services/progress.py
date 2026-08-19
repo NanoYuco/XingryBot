@@ -1,5 +1,7 @@
+import logging
+
 from database.repo_repository import get_user_repos, update_repo_stats
-from github.client import fetch_repo_today_commits
+from github.client import fetch_repo_commits_window, fetch_repo_today_commits
 
 
 async def collect_today_progress(user_id: int):
@@ -33,3 +35,24 @@ async def collect_today_progress(user_id: int):
         update_repo_stats(user_id, repo_path, today_count, today_str)
 
     return results, total_new_commits
+
+
+async def collect_patrol_progress(user_id: int, baseline):
+    """Collect complete commit results for the 24 hours before one patrol."""
+    results = []
+    total_commits = 0
+
+    for repo_path, _, _ in get_user_repos(user_id):
+        try:
+            result = await fetch_repo_commits_window(repo_path, baseline)
+        except Exception:
+            logging.error("Failed to collect one patrol repository.")
+            result = None
+        if result is None:
+            results.append({"repo_path": repo_path, "unavailable": True})
+            continue
+
+        results.append(result)
+        total_commits += result["count"]
+
+    return results, total_commits
