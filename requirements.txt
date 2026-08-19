@@ -1,0 +1,4 @@
+aiohttp>=3.9
+chinesecalendar>=1.11.0
+python-dotenv>=1.0
+python-telegram-bot[job-queue,socks]>=20.0
