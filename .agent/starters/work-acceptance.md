@@ -10,7 +10,7 @@
 3. `.agent/project-context.md`
 4. `.agent-work/tasks/<task-id>/task-contract.md`
 5. `.agent-work/tasks/<task-id>/delivery-report.md`
-6. `.agent-work/tasks/<task-id>/technical-review-report.md`（如果存在或本任务要求）
+6. `.agent-work/tasks/<task-id>/technical-review-report.md`
 7. 当前工作树的实际 Diff、测试结果和运行/渲染证据
 
 当前模式：交付验收。
